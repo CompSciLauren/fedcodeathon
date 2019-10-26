@@ -4,9 +4,9 @@ import sys
 import logging as log
 
 if __name__ == '__main__':
-    logger = log.getLogger('spam_application')
+    logger = log.getLogger('kodan_backend')
     logger.setLevel(log.DEBUG)
-    fh = log.FileHandler('spam.log')
+    fh = log.FileHandler('kodan.log')
     fh.setLevel(log.DEBUG)
     logger.addHandler(fh)
 
