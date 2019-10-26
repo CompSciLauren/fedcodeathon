@@ -2,7 +2,7 @@ import requests
 import json
 from pprint import pprint
 
-api_key = 'Q7m1szUGxW5Luh5SKv3uwQxyXWEnv6u_jqsO8AC5t-UhcUc7uTHDdxXMwN-3t8C_6hVY49_VASpCbGDjceRdsXOFzAY0SZb3slCyxZ07O5AeeXcmswWd0-iVsnO0XXYx'
+api_key = open('yelp_key', 'r').read().strip()
 headers = {'Authorization': 'Bearer %s' % api_key}
 url = 'https://api.yelp.com/v3/businesses/search'
 
