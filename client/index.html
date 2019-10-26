@@ -102,7 +102,7 @@
             </p>
 
             <div class="row">
-              <form class="form-inline">
+              <form class="form-inline" method="GET" action="maps-results.html">
                 <div class="form-group">
                   <!-- location input -->
                   <input
@@ -136,11 +136,12 @@
                   />
                 </div>
                 <div class="form-group">
-                  <a
+                  <button
+                    id="search-button"
                     class="btn btn-primary btn-xl js-scroll-trigger"
-                    href="maps-results.html"
-                    >Search</a
                   >
+                    Search
+                  </button>
                 </div>
               </form>
             </div>
@@ -387,12 +388,16 @@
     <script src="js/creative.min.js"></script>
 
     <!-- Google Maps Search Box-->
-    <!-- <script
+    <script
       type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkxgDnPSlIZhmvNnNAoHCdFcjfshZmFZ0&amp;libraries=places"
-    ></script> -->
+    ></script>
 
     <script>
+      // $('#search-button').on('click', function() {
+      //   window.location.assign('maps-results.html');
+      // });
+
       google.maps.event.addDomListener(window, 'load', initialize);
       function initialize() {
         let input = document.getElementById('autocomplete_search');
