@@ -98,6 +98,21 @@
               Bootstrap framework! Just download a theme and start customizing,
               no strings attached!
             </p>
+
+            <div id="custom-search-input">
+              <div class="input-group">
+                <input
+                  id="autocomplete_search"
+                  name="autocomplete_search"
+                  type="text"
+                  class="form-control"
+                  placeholder="Search"
+                />
+                <input type="hidden" name="lat" />
+                <input type="hidden" name="long" />
+              </div>
+            </div>
+
             <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about"
               >Find Out More</a
             >
@@ -342,5 +357,25 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
+
+    <!-- Google Maps Search Box-->
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkxgDnPSlIZhmvNnNAoHCdFcjfshZmFZ0&amp;libraries=places"
+    ></script>
+
+    <script>
+      google.maps.event.addDomListener(window, 'load', initialize);
+      function initialize() {
+        var input = document.getElementById('autocomplete_search');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          // place variable will have all the information you are looking for.
+          $('#lat').val(place.geometry['location'].lat());
+          $('#long').val(place.geometry['location'].lng());
+        });
+      }
+    </script>
   </body>
 </html>
