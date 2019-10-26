@@ -5,6 +5,6 @@ from .serializers import ScraperSerializer
 # Create your views here.
 
 
-class ListScraperResultsView(generics.ListAPIView):
+class ListScraperResultsView(generics.ListCreateAPIView):
     queryset = Scraper.objects.all()
     serializer_class = ScraperSerializer

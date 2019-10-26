@@ -4,10 +4,10 @@ from django.db import models
 
 
 class Scraper(models.Model):
-    tweets_filter = models.CharField(max_length=100)
-    reviews_filter = models.IntegerField(default=0)
+    business_type = models.CharField(max_length=100, null=True)
+    longitude = models.CharField(max_length=100, null=True)
+    latitude = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=100, null=True)
 
-    def __str__(self):
-        return "{} - {}".format(self.tweets_filter, self.reviews_filter)
-
-        
+    # def __str__(self):
+    #    return "{} - {}".format(self.tweets_filter, self.reviews_filter)
