@@ -1,5 +1,4 @@
 *__pycache__/
 *.py[cod]
 *.bat
-backend/data_collectors/yelp_key
 *_key
