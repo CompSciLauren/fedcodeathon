@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Maps</title>
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      /**
+       * Get the URL parameters
+       * source: https://css-tricks.com/snippets/javascript/get-url-variables/
+       * @param  {String} url The URL
+       * @return {Object}     The URL parameters
+       */
+      var getParams = function(url) {
+        var params = {};
+        var parser = document.createElement('a');
+        parser.href = url;
+        var query = parser.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          params[pair[0]] = decodeURIComponent(pair[1]);
+        }
+        return params;
+      };
+      console.log(getParams(window.location.href));
+
+      let map;
+      let service;
+      let infowindow;
+
+      function initMap() {
+        let locationSearchedFor = new google.maps.LatLng(39.099, -94.578);
+
+        infowindow = new google.maps.InfoWindow();
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: locationSearchedFor,
+          zoom: 15,
+        });
+
+        let request = {
+          query: 'Museum of Contemporary Art Australia',
+          fields: ['name', 'geometry'],
+        };
+
+        let service = new google.maps.places.PlacesService(map);
+
+        service.findPlaceFromQuery(request, function(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+              createMarker(results[i]);
+            }
+            map.setCenter(results[0].geometry.location);
+          }
+        });
+      }
+    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLVOmWxodlQqNDbT5Uj3IKhNPHO7Hf5pY&callback=initMap"
+      async
+      defer
+    ></script>
+  </body>
+</html>
