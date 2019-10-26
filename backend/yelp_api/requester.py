@@ -24,6 +24,7 @@ class YelpRequester:
 
         # printing the text from response
         return json.loads(req.text)
+        #
 
 
 pprint(YelpRequester().get_yelp_results("restaurant", "Kansas City"))
