@@ -6,4 +6,4 @@ class ScraperSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Scraper
-        fields = ('business_type', 'latitude', 'longitude', 'city',)
+        fields = ('business_type', 'latitude', 'longitude', 'city', 'radius',)
