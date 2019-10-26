@@ -1,5 +1,6 @@
 import logging as log
 import googlemaps
+from pprint import pprint
 
 class BusinessAPIScraper:
 	def __init__(self, keyfile, endpoint):
@@ -34,4 +35,4 @@ if __name__ == "__main__":
 		'longitutde' : -94.724861, # degrees
 		'radius' : 1 # miles
 	}
-	GoogleScraper('google_key').get_business_list_radius(area, 'restaurant')
+	pprint(GoogleScraper('google_key').get_business_list_radius(area, 'restaurant'))
