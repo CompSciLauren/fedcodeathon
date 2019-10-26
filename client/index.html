@@ -395,11 +395,11 @@
     <script>
       google.maps.event.addDomListener(window, 'load', initialize);
       function initialize() {
-        var input = document.getElementById('autocomplete_search');
-        var autocomplete = new google.maps.places.Autocomplete(input);
+        let input = document.getElementById('autocomplete_search');
+        let autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function() {
-          var place = autocomplete.getPlace();
-          // place variable will have all the information you are looking for.
+          let place = autocomplete.getPlace();
+          // place letiable will have all the information you are looking for.
           $('#lat').val(place.geometry['location'].lat());
           $('#long').val(place.geometry['location'].lng());
         });
