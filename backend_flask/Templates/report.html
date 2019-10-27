@@ -3,15 +3,18 @@
 </head>
 <body>
     <h1>
-        Businesses in the area:
+        {{ biz.capitalize()+" report within "+rad }} miles of {{ place }}
     </h1>
+    <h2>
+        Businesses in the area:
+    </h2>
     <ul>
         {% for biz in biz_data %}
             <li>
-                <span>Name: {{ biz['name'] }}</span><br>
+                <h3>Name: {{ biz['name'] }}</h3><br>
                 <span>Rating: {{ biz['rating'] }}</span><br>
                 <span>Address: {{ biz['formatted_address'] }} </span><br>
-                <ul> <h3> Types: </h3>
+                <ul> <h4> Types: </h4>
                 	{% for t in biz['types'] %}
                 		<li>{{ t }}</li>
                 	{% endfor %}
@@ -20,12 +23,13 @@
             </li>
         {% endfor %}
     </ul>
+
     <h1>
     	Real Estate data:
     </h1>
-    <h3>
+    <h2>
     	Rent:
-    </h3>
+    </h2>
     <ul>
     	<li>
     		<span>High: {{ cost_data['rentRangeHigh'] }}</span><br>
@@ -36,5 +40,24 @@
     	<li>
     		<span>Low: {{ cost_data['rentRangeLow'] }}</span><br>
     	</li>
+    </ul>
+
+    <h1>
+        Air Quality:
+    </h1>
+    <span>Data available: {{ air_qual['data_available'] }}</span>
+    <ul>
+        {% for a, q in air_qual['indexes'].items() %}
+            <li>
+                <h2>
+                    {{ q['display_name'] }}
+                </h2>
+                <span>AQI: {{ q['aqi_display'] }}</span><br>
+                <span>{{ q['color'] }}</span><br>
+                <span>Category: {{ q['category'] }}</span><br>
+                <span>Dominant pollutant: {{ q['dominant_pollutant'] }}</span><br>
+                <br><br><br>
+            </li>
+        {% endfor %}
     </ul>
 </body>
