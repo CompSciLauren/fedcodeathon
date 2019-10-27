@@ -3,12 +3,20 @@ import json
 import requests
 
 
-class TrafficScraper:
-    def get_traffic_by_latLang(self, lat, lang, api_key):
-        url = 'http://api.walkscore.com/score?format=json&lat=' + lat + \
-            '&lon=' + lang + '&transit=1&bike=1&wsapikey=' + api_key
-        response = requests.request("GET", url)
+def get_traffic_by_lat_lng(lat, lng, keyfile):
+    api_key = open(keyfile).read().strip()
+    url = 'http://api.walkscore.com/score'
+    querystring = {'format': 'json',
+                    'lat': str(lat),
+                    'lon': str(lng),
+                    'transit': '1',
+                    'bike': '1',
+                    'wsapikey': api_key}
+    response = requests.get(url, params=querystring)
 
-        results = response.json()
+    results = response.json()
 
-        return results
+    return results
+
+if __name__ == "__main__":
+    print(get_traffic_by_lat_lng(38.899090, -94.724861, 'traffic_key'))
