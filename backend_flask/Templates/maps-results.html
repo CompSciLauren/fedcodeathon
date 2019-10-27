@@ -43,6 +43,7 @@
       };
 
       let queryParams = getParams(window.location.href);
+      let queryString = window.location.href.split('?')[1];
       let lat = parseFloat(queryParams.lat);
       let lng = parseFloat(queryParams.lng);
       let latlng = { lat: lat, lng: lng };
@@ -54,9 +55,10 @@
 
       function makeRequest() {
         $.ajax({
-          url: '/',
+          url: '/api?' + queryString,
           success: function(result) {
-            console.log(result);
+            console.log(result.results[0].geometry.location.lat);
+            console.log(result.results[0].geometry.location.lng);
             let locationSearchedFor = new google.maps.LatLng(lat, lng);
 
             // content for map marker
