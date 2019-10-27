@@ -66,17 +66,15 @@
             });
 
             // radius marker
-            new google.maps.Marker({
-              position: latlng,
+            let resultsRadiusCircle = new google.maps.Circle({
+              strokeColor: 'white',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: 'blue',
+              fillOpacity: 0.35,
               map: map,
-              icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                fillColor: 'red',
-                fillOpacity: 0.2,
-                strokeColor: 'white',
-                strokeWeight: 0.5,
-                scale: 400,
-              },
+              center: latlng,
+              radius: 1000,
             });
 
             // business type markers
