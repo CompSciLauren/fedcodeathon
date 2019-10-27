@@ -30,10 +30,35 @@ headers = {
 response = requests.request("GET",
                             'http://api.walkscore.com/score?format=json&lat=39.123986709552&lon=-94.55402165065&transit=1&bike=1&wsapikey=37549c9690a7077d47447248f074dc15')
 
-pprint(response.text)
+
+class AreaCostScraper:
+    def __init__(self, keyfile):
+        headers['x-rapidapi-key'] = open(keyfile, "r").read().strip()
+
+    def get_cost_address(self, address):
+        querystring = {"address": address}
+
+        response = requests.request(
+            "GET", url, headers=headers, params=querystring)
+
+        results = response.json()
+
+        return results
+
+    def get_cost_lng_lat(self, area):
+        querystring = {'longitude': area['lng'], 'latitude': area['lat']}
+
+        response = requests.request(
+            "GET", url, headers=headers, params=querystring)
+
+        results = response.json()
+
+        return results
 
 
-#pprint(AreaCostScraper().get_area_cost("7603 Monrovia St, Lenexa, KS"))
+if __name__ == "__main__":
+    pprint(AreaCostScraper('rent_key').get_cost_address(
+        "7603 Monrovia St, Lenexa, KS"))
 
 """
 rjstuff = response.json()
