@@ -3,7 +3,7 @@ import json
 import requests
 
 
-def get_traffic_by_lat_lng(lat, lng, keyfile):
+def get_traffic_lat_lng(lat, lng, keyfile):
     api_key = open(keyfile).read().strip()
     url = 'http://api.walkscore.com/score'
     querystring = {'format': 'json',
@@ -19,4 +19,4 @@ def get_traffic_by_lat_lng(lat, lng, keyfile):
     return results
 
 if __name__ == "__main__":
-    print(get_traffic_by_lat_lng(38.899090, -94.724861, 'traffic_key'))
+    print(get_traffic_lat_lng(38.899090, -94.724861, 'traffic_key'))
