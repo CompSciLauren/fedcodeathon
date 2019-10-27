@@ -14,8 +14,8 @@ class BusinessAPIScraper:
         """
         Return a list of businesses of given type in given area
         area = {
-            'latitude' : 37.5, # degrees
-            'longitude' : 42, # degrees
+            'lat' : 37.5, # degrees
+            'lng' : 42, # degrees
             'radius' : 1000 # meters
         }"""
         pass
@@ -26,7 +26,7 @@ class GoogleScraper(BusinessAPIScraper):
         self.client = googlemaps.Client(self.key)
 
     def get_business_list_radius(self, area, b_type, language='en-US', region='US'):
-        location = (area['latitude'], area['longitude'])
+        location = (area['lat'], area['lng'])
         radius = area['radius']
         url = self.endpoint + '/findplacefromtext/json'
         return self.client.places(b_type, location=location, radius=radius)
@@ -39,7 +39,7 @@ class YelpScraper(BusinessAPIScraper):
         headers = {'Authorization': 'Bearer %s' % self.key}
         # In the dictionary, term can take values like food, cafes or businesses like McDonalds
         # params = {'term': 'seafood', 'location': 'New York City'}
-        params = {'term': b_type, 'longitude': area['longitude'], 'latitude': area['latitude']}
+        params = {'term': b_type, 'lng': area['lng'], 'lat': area['lat']}
 
         # Making a get request to the API
         req = requests.get(self.endpoint+'/search', params=params, headers=headers)
@@ -54,8 +54,8 @@ class YelpScraper(BusinessAPIScraper):
 
 if __name__ == "__main__":
     area = {
-        'latitude' : 38.899090, # degrees
-        'longitude' : -94.724861, # degrees
+        'lat' : 38.899090, # degrees
+        'lng' : -94.724861, # degrees
         'radius' : 1 # miles
     }
     #google
