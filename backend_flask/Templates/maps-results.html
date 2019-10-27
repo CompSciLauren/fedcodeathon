@@ -48,6 +48,7 @@
       let lng = parseFloat(queryParams.lng);
       let latlng = { lat: lat, lng: lng };
       let businessType = queryParams.business_type_search;
+      let radius = parseFloat(queryParams.radius_search);
 
       function initMap() {
         makeRequest();
@@ -74,7 +75,7 @@
               fillOpacity: 0.35,
               map: map,
               center: latlng,
-              radius: 1000,
+              radius: radius,
             });
 
             // business type markers
