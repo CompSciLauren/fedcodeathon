@@ -14,15 +14,10 @@ def render_index():
 @app.route("/map")
 def render_map():
     place = request.args.get('autocomplete_search')
-    print(place)
     biz = request.args.get('business_type_search')
-    print(biz)
     rad = request.args.get('radius_search')
-    print(rad)
     lat = request.args.get('lat')
-    print(lat)
     lng = request.args.get('lng')
-    print(lng)
     return render_template("maps-results.html")
 
 @app.route("/report")
@@ -63,7 +58,7 @@ def air_api():
     lat = request.args.get('lat')
     lng = request.args.get('lng')
 
-    return jsonify(get_traffic_lat_lng(lat, lng, 'data_collectors/air_quality_key'))
+    return jsonify(get_quality_lat_lng(lat, lng, 'data_collectors/air_quality_key'))
 
 @app.route("/rent_api", methods=["GET"])
 def rent_api():
