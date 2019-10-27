@@ -418,7 +418,7 @@
         let autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function() {
           let place = autocomplete.getPlace();
-          // place letiable will have all the information you are looking for.
+          // place variable will have all the information you are looking for.
           $('#lat').val(place.geometry['location'].lat());
           $('#lng').val(place.geometry['location'].lng());
         });
