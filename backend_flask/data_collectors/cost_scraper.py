@@ -44,8 +44,8 @@ class AreaCostScraper:
 
         return results
 
-    def get_cost_lng_lat(self, area):
-        querystring = {'longitude': area['lng'], 'latitude': area['lat']}
+    def get_cost_lat_lng(self, lat, lng):
+        querystring = {'longitude': lng, 'latitude': lat}
 
         response = requests.request(
             "GET", url, headers=headers, params=querystring)
@@ -55,8 +55,8 @@ class AreaCostScraper:
         return results
 
 if __name__ == "__main__":
-    pprint(AreaCostScraper('rent_key').get_cost_address("7603 Monrovia St, Lenexa, KS"))
-
+    #pprint(AreaCostScraper('rent_key').get_cost_address("7603 Monrovia St, Lenexa, KS"))
+    pprint(AreaCostScraper('rent_key').get_cost_lat_lng(38.899090, -94.724861))
 """
 rjstuff = response.json()
 results = rjstuff['result']
