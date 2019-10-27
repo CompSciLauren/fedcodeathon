@@ -31,7 +31,7 @@ def render_report():
     g_scraper = GoogleScraper('data_collectors/google_key')
     c_scraper = AreaCostScraper('data_collectors/rent_key')
     b_list = g_scraper.get_business_list_radius(area, biz)
-    c_list = c_scraper.get_cost_lng_lat(area)
+    c_list = c_scraper.get_cost_lat_lng(lat, lng)
     return render_template("report.html", biz_data=b_list['results'], cost_data=c_list)
 
 @app.route("/map_api", methods=["GET"])
