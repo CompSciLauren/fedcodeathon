@@ -63,7 +63,7 @@ def air_api():
     lat = request.args.get('lat')
     lng = request.args.get('lng')
 
-    return jsonify(get_traffic_lat_lng(lat, lng, 'data_collectors/air_quality_key'))
+    return jsonify(get_quality_lat_lng(lat, lng, 'data_collectors/air_quality_key'))
 
 @app.route("/rent_api", methods=["GET"])
 def rent_api():
