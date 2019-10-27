@@ -66,7 +66,7 @@
         controlUI.style.cursor = 'pointer';
         controlUI.style.marginBottom = '22px';
         controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to recenter the map';
+        controlUI.title = 'Click to view the report';
         controlDiv.appendChild(controlUI);
 
         // Set CSS for the control interior.
@@ -77,12 +77,12 @@
         controlText.style.lineHeight = '38px';
         controlText.style.paddingLeft = '5px';
         controlText.style.paddingRight = '5px';
-        controlText.innerHTML = 'Center Map';
+        controlText.innerHTML = 'View Report';
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners: simply set the map to latlng.
         controlUI.addEventListener('click', function() {
-          map.setCenter(latlng);
+          window.open('/report?' + queryString);
         });
       }
 
@@ -159,7 +159,7 @@
             var centerControl = new CenterControl(centerControlDiv, map);
 
             centerControlDiv.index = 1;
-            map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+            map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(
               centerControlDiv
             );
 
