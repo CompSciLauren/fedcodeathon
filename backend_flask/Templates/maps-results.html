@@ -91,7 +91,7 @@
             });
 
             // map markers
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < result.results.length; i++) {
               lat = parseFloat(result.results[i].geometry.location.lat);
               lng = parseFloat(result.results[i].geometry.location.lng);
               latlng = { lat: lat, lng: lng };
