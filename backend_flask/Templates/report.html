@@ -20,4 +20,21 @@
             </li>
         {% endfor %}
     </ul>
+    <h1>
+    	Real Estate data:
+    </h1>
+    <h3>
+    	Rent:
+    </h3>
+    <ul>
+    	<li>
+    		<span>High: {{ cost_data['rentRangeHigh'] }}</span><br>
+    	</li>
+    	<li>
+    		<span>Average: {{ cost_data['rent'] }}</span><br>
+    	</li>
+    	<li>
+    		<span>Low: {{ cost_data['rentRangeLow'] }}</span><br>
+    	</li>
+    </ul>
 </body>
