@@ -26,12 +26,15 @@ for result in rjstuff['result']:
 url = "https://realtymole-rental-estimate-v1.p.rapidapi.com/rentalPrice"
 headers = {
     'x-rapidapi-host': "realtymole-rental-estimate-v1.p.rapidapi.com",
-    'x-rapidapi-key': "hidden"
+    'x-rapidapi-key': 'hidden'
 }
 
 
-class AreaCostScraper():
-    def get_area_cost(self, address):
+class AreaCostScraper:
+    def __init__(self, keyfile):
+        headers['x-rapidapi-key'] = open(keyfile, "r").read().strip()
+
+    def get_cost_address(self, address):
         querystring = {"address": address}
 
         response = requests.request(
@@ -41,8 +44,18 @@ class AreaCostScraper():
 
         return results
 
+    def get_cost_lng_lat(self, area):
+        querystring = {'longitude': area['lng'], 'latitude': area['lat']}
 
-#pprint(AreaCostScraper().get_area_cost("7603 Monrovia St, Lenexa, KS"))
+        response = requests.request(
+            "GET", url, headers=headers, params=querystring)
+
+        results = response.json()
+
+        return results
+
+if __name__ == "__main__":
+    pprint(AreaCostScraper('rent_key').get_cost_address("7603 Monrovia St, Lenexa, KS"))
 
 """
 rjstuff = response.json()

@@ -62,4 +62,4 @@ if __name__ == "__main__":
     pprint(GoogleScraper('google_key').get_business_list_radius(area, 'restaurant'))
 
     #yelp
-    pprint(YelpScraper('yelp_key').get_business_list_radius(area, "restaurant"))
+    #pprint(YelpScraper('yelp_key').get_business_list_radius(area, "restaurant"))

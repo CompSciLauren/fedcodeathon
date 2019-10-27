@@ -2,5 +2,22 @@
 
 </head>
 <body>
-	<p>{{ output }}</p>
+    <h1>
+        Businesses in the area:
+    </h1>
+    <ul>
+        {% for biz in biz_data %}
+            <li>
+                <span>Name: {{ biz['name'] }}</span><br>
+                <span>Rating: {{ biz['rating'] }}</span><br>
+                <span>Address: {{ biz['formatted_address'] }} </span><br>
+                <ul> <h3> Types: </h3>
+                	{% for t in biz['types'] %}
+                		<li>{{ t }}</li>
+                	{% endfor %}
+                </ul>
+                <br><br><br>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
