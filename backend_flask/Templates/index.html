@@ -223,7 +223,7 @@
           <div class="col-lg-4 col-sm-6">
             <a
               class="portfolio-box"
-              href="/static/img/portfolio/fullsize/warrens.jpg"
+              href="/static/img/portfolio/fullsize/warrensFull.jpg"
             >
               <img
                 class="img-fluid"
@@ -243,11 +243,11 @@
           <div class="col-lg-4 col-sm-6">
             <a
               class="portfolio-box"
-              href="/static/img/portfolio/fullsize/2.jpg"
+              href="/static/img/portfolio/fullsize/kelynsFull.jpg"
             >
               <img
                 class="img-fluid"
-                src="/static/img/portfolio/thumbnails/2.jpg"
+                src="/static/img/portfolio/thumbnails/kelyns.jpeg"
                 alt=""
               />
               <div class="portfolio-box-caption">
@@ -263,11 +263,11 @@
           <div class="col-lg-4 col-sm-6">
             <a
               class="portfolio-box"
-              href="/static/img/portfolio/fullsize/3.jpg"
+              href="/static/img/portfolio/fullsize/laurensFull.jpg"
             >
               <img
                 class="img-fluid"
-                src="/static/img/portfolio/thumbnails/3.jpg"
+                src="/static/img/portfolio/thumbnails/laurens.jpeg"
                 alt=""
               />
               <div class="portfolio-box-caption">
@@ -283,11 +283,11 @@
           <div class="col-lg-4 col-sm-6">
             <a
               class="portfolio-box"
-              href="/static/img/portfolio/fullsize/4.jpg"
+              href="/static/img/portfolio/fullsize/mehrsasFull.jpg"
             >
               <img
                 class="img-fluid"
-                src="/static/img/portfolio/thumbnails/4.jpg"
+                src="/static/img/portfolio/thumbnails/mehrsas.jpeg"
                 alt=""
               />
               <div class="portfolio-box-caption">
@@ -303,11 +303,11 @@
           <div class="col-lg-4 col-sm-6">
             <a
               class="portfolio-box"
-              href="/static/img/portfolio/fullsize/5.jpg"
+              href="/static/img/portfolio/fullsize/5.png"
             >
               <img
                 class="img-fluid"
-                src="/static/img/portfolio/thumbnails/5.jpg"
+                src="/static/img/portfolio/thumbnails/5.png"
                 alt=""
               />
               <div class="portfolio-box-caption">
@@ -323,11 +323,11 @@
           <div class="col-lg-4 col-sm-6">
             <a
               class="portfolio-box"
-              href="/static/img/portfolio/fullsize/6.jpg"
+              href="/static/img/portfolio/fullsize/ellysFull.jpeg"
             >
               <img
                 class="img-fluid"
-                src="/static/img/portfolio/thumbnails/6.jpg"
+                src="/static/img/portfolio/thumbnails/ellys.jpeg"
                 alt=""
               />
               <div class="portfolio-box-caption p-3">
@@ -412,17 +412,17 @@
     ></script>
 
     <script>
-      google.maps.event.addDomListener(window, 'load', initialize);
+      google.maps.event.addDomListener(window, "load", initialize);
       function initialize() {
-        let input = document.getElementById('autocomplete_search');
-        let businessTypeInput = document.getElementById('business_type_search');
-        let radiusInput = document.getElementById('radius_search');
+        let input = document.getElementById("autocomplete_search");
+        let businessTypeInput = document.getElementById("business_type_search");
+        let radiusInput = document.getElementById("radius_search");
         let autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.addListener('place_changed', function() {
+        autocomplete.addListener("place_changed", function() {
           let place = autocomplete.getPlace();
           // place variable will have all the information you are looking for.
-          $('#lat').val(place.geometry['location'].lat());
-          $('#lng').val(place.geometry['location'].lng());
+          $("#lat").val(place.geometry["location"].lat());
+          $("#lng").val(place.geometry["location"].lng());
         });
       }
     </script>
