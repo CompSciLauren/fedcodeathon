@@ -57,7 +57,7 @@
         $.ajax({
           url: '/api?' + queryString,
           success: function(result) {
-            console.log(result.results);
+            console.log(result);
             let locationSearchedFor = new google.maps.LatLng(lat, lng);
 
             let map = new google.maps.Map(document.getElementById('map'), {
@@ -65,7 +65,21 @@
               zoom: 15,
             });
 
-            // map markers
+            // radius marker
+            new google.maps.Marker({
+              position: latlng,
+              map: map,
+              icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                fillColor: 'red',
+                fillOpacity: 0.2,
+                strokeColor: 'white',
+                strokeWeight: 0.5,
+                scale: 400,
+              },
+            });
+
+            // business type markers
             for (let i = 0; i < result.results.length; i++) {
               let contentString =
                 '<div id="content">' +
@@ -110,7 +124,7 @@
       }
     </script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLVOmWxodlQqNDbT5Uj3IKhNPHO7Hf5pY&callback=initMap"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLVOmWxodlQqNDbT5Uj3IKhNPHO7Hf5pY&libraries=geometry&callback=initMap"
       async
       defer
     ></script>
