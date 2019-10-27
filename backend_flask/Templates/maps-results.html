@@ -40,10 +40,11 @@
         }
         return params;
       };
-      console.log(getParams(window.location.href));
+
       let queryParams = getParams(window.location.href);
       let lat = queryParams.lat;
       let lng = queryParams.lng;
+      let businessType = queryParams.business_type_search;
 
       let map;
       let service;
