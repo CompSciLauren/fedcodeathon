@@ -416,6 +416,7 @@
       function initialize() {
         let input = document.getElementById('autocomplete_search');
         let businessTypeInput = document.getElementById('business_type_search');
+        let radiusInput = document.getElementById('radius_search');
         let autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function() {
           let place = autocomplete.getPlace();

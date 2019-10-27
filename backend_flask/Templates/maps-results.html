@@ -48,6 +48,7 @@
       let lng = parseFloat(queryParams.lng);
       let latlng = { lat: lat, lng: lng };
       let businessType = queryParams.business_type_search;
+      let radius = parseFloat(queryParams.radius_search);
 
       function initMap() {
         makeRequest();
@@ -57,7 +58,7 @@
         $.ajax({
           url: '/api?' + queryString,
           success: function(result) {
-            console.log(result.results);
+            console.log(result);
             let locationSearchedFor = new google.maps.LatLng(lat, lng);
 
             let map = new google.maps.Map(document.getElementById('map'), {
@@ -65,7 +66,19 @@
               zoom: 15,
             });
 
-            // map markers
+            // radius marker
+            let resultsRadiusCircle = new google.maps.Circle({
+              strokeColor: 'white',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: 'blue',
+              fillOpacity: 0.35,
+              map: map,
+              center: latlng,
+              radius: radius,
+            });
+
+            // business type markers
             for (let i = 0; i < result.results.length; i++) {
               let contentString =
                 '<div id="content">' +
@@ -110,7 +123,7 @@
       }
     </script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLVOmWxodlQqNDbT5Uj3IKhNPHO7Hf5pY&callback=initMap"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLVOmWxodlQqNDbT5Uj3IKhNPHO7Hf5pY&libraries=geometry&callback=initMap"
       async
       defer
     ></script>
