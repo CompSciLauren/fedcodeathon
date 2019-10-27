@@ -41,11 +41,15 @@
         return params;
       };
       console.log(getParams(window.location.href));
+      let queryParams = getParams(window.location.href);
+      let lat = queryParams.lat;
+      let lng = queryParams.lng;
+
       let map;
       let service;
       let infowindow;
       function initMap() {
-        let locationSearchedFor = new google.maps.LatLng(39.099, -94.578);
+        let locationSearchedFor = new google.maps.LatLng(lat, lng);
         infowindow = new google.maps.InfoWindow();
         map = new google.maps.Map(document.getElementById('map'), {
           center: locationSearchedFor,
