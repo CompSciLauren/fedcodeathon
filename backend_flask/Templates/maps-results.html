@@ -98,13 +98,13 @@
               let marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: i,
+                title: 'Title',
+              });
+
+              marker.addListener('click', function() {
+                infowindow.open(map, marker);
               });
             }
-
-            marker.addListener('click', function() {
-              infowindow.open(map, marker);
-            });
 
             $('#div1').html({ result });
           },
