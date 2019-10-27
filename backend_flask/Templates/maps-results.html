@@ -57,8 +57,6 @@
         $.ajax({
           url: '/api?' + queryString,
           success: function(result) {
-            console.log(result.results[0].geometry.location.lat);
-            console.log(result.results[0].geometry.location.lng);
             let locationSearchedFor = new google.maps.LatLng(lat, lng);
 
             // content for map marker
@@ -93,11 +91,17 @@
             });
 
             // map markers
-            let marker = new google.maps.Marker({
-              position: latlng,
-              map: map,
-              title: 'Uluru (Ayers Rock)',
-            });
+            for (let i = 0; i < 2; i++) {
+              lat = parseFloat(result.results[i].geometry.location.lat);
+              lng = parseFloat(result.results[i].geometry.location.lng);
+              latlng = { lat: lat, lng: lng };
+              let marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: i,
+              });
+            }
+
             marker.addListener('click', function() {
               infowindow.open(map, marker);
             });
