@@ -21,6 +21,7 @@
   </head>
   <body>
     <div id="map"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
       /**
        * Get the URL parameters
@@ -28,45 +29,83 @@
        * @param  {String} url The URL
        * @return {Object}     The URL parameters
        */
-      var getParams = function(url) {
-        var params = {};
-        var parser = document.createElement('a');
+      let getParams = function(url) {
+        let params = {};
+        let parser = document.createElement('a');
         parser.href = url;
-        var query = parser.search.substring(1);
-        var vars = query.split('&');
-        for (var i = 0; i < vars.length; i++) {
-          var pair = vars[i].split('=');
+        let query = parser.search.substring(1);
+        let vars = query.split('&');
+        for (let i = 0; i < vars.length; i++) {
+          let pair = vars[i].split('=');
           params[pair[0]] = decodeURIComponent(pair[1]);
         }
         return params;
       };
-      console.log(getParams(window.location.href));
-      let queryParams = getParams(window.location.href);
-      let lat = queryParams.lat;
-      let lng = queryParams.lng;
 
-      let map;
-      let service;
-      let infowindow;
+      let queryParams = getParams(window.location.href);
+      let queryString = window.location.href.split('?')[1];
+      let lat = parseFloat(queryParams.lat);
+      let lng = parseFloat(queryParams.lng);
+      let latlng = { lat: lat, lng: lng };
+      let businessType = queryParams.business_type_search;
+
       function initMap() {
-        let locationSearchedFor = new google.maps.LatLng(lat, lng);
-        infowindow = new google.maps.InfoWindow();
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: locationSearchedFor,
-          zoom: 15,
-        });
-        let request = {
-          query: 'Museum of Contemporary Art Australia',
-          fields: ['name', 'geometry'],
-        };
-        let service = new google.maps.places.PlacesService(map);
-        service.findPlaceFromQuery(request, function(results, status) {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (let i = 0; i < results.length; i++) {
-              createMarker(results[i]);
+        makeRequest();
+      }
+
+      function makeRequest() {
+        $.ajax({
+          url: '/api?' + queryString,
+          success: function(result) {
+            console.log(result.results);
+            let locationSearchedFor = new google.maps.LatLng(lat, lng);
+
+            let map = new google.maps.Map(document.getElementById('map'), {
+              center: locationSearchedFor,
+              zoom: 15,
+            });
+
+            // map markers
+            for (let i = 0; i < result.results.length; i++) {
+              let contentString =
+                '<div id="content">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                '<p><b>' +
+                result.results[i].name +
+                '</b>' +
+                '<br/>' +
+                result.results[i].formatted_address +
+                '</p>' +
+                '<p>Type: ' +
+                result.results[i].types[0] +
+                ', ' +
+                result.results[i].types[1] +
+                '</p>' +
+                '</div>' +
+                '</div>';
+
+              lat = parseFloat(result.results[i].geometry.location.lat);
+              lng = parseFloat(result.results[i].geometry.location.lng);
+              latlng = { lat: lat, lng: lng };
+
+              let infowindow = new google.maps.InfoWindow({
+                content: contentString,
+              });
+
+              let marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: 'Title',
+              });
+
+              marker.addListener('click', function() {
+                infowindow.open(map, marker);
+              });
             }
-            map.setCenter(results[0].geometry.location);
-          }
+
+            $('#div1').html({ result });
+          },
         });
       }
     </script>
