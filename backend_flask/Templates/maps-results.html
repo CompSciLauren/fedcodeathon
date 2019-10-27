@@ -75,7 +75,7 @@
               fillOpacity: 0.35,
               map: map,
               center: latlng,
-              radius: radius,
+              radius: radius * 1609.344, // convert meters to miles
             });
 
             // business type markers
