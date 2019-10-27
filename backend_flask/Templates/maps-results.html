@@ -92,7 +92,7 @@
 
       function makeRequest() {
         $.ajax({
-          url: '/api?' + queryString,
+          url: '/map_api?' + queryString,
           success: function(result) {
             console.log(result);
             let locationSearchedFor = new google.maps.LatLng(lat, lng);
