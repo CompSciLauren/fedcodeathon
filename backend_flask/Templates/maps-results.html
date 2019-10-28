@@ -180,7 +180,7 @@
 
       function makeBikeRequest(callback) {
         $.ajax({
-          url: '/traffic_api?',
+          url: '/traffic_api?' + queryString,
           success: function(result) {
             callback(result);
           },
@@ -274,7 +274,7 @@
 
             makeBikeRequest(function(bikeRequestResult) {
               console.log(bikeRequestResult);
-              let score = bikeRequestResult.status;
+              let score = bikeRequestResult.bike.score;
 
               const bikeControl = new MapImageButton({
                 title: 'Click to view Bike report',
