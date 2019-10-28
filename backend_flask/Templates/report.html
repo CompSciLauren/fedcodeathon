@@ -1,74 +1,113 @@
 <head>
+  <link
+    href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    rel="stylesheet"
+    id="bootstrap-css"
+  />
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
 
+  <link
+    href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    rel="stylesheet"
+    id="bootstrap-css"
+  />
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>
-        {{ biz.capitalize()+" report within "+rad }} miles of {{ place }}
-    </h1>
-    <h2>
-        Businesses in the area:
-    </h2>
-    <ul>
-        {% for biz in biz_data %}
-            <li>
-                <h3>Name: {{ biz['name'] }}</h3><br>
-                <span>Rating: {{ biz['rating'] }}</span><br>
-                <span>Address: {{ biz['formatted_address'] }} </span><br>
-                <ul> <h4> Types: </h4>
-                	{% for t in biz['types'] %}
-                		<li>{{ t }}</li>
-                	{% endfor %}
-                </ul>
-                <br><br><br>
-            </li>
-        {% endfor %}
-    </ul>
+  <h1>{{ biz.capitalize() + " report within " + rad }} miles of {{ place }}</h1>
+  <h2>
+    Competitions:
+  </h2>
+  <div>
+    <table class="table table-striped table-responsive-md btn-table">
+      <thead class="black white-text">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Address</th>
+          <th scope="col">Business Types</th>
+        </tr>
+      </thead>
+      {% for biz in biz_data %}
+      <tbody>
+        <tr>
+          <td>{{ biz["name"] }}</td>
+          <td>{{ biz["rating"] }}</td>
+          <td>{{ biz["formatted_address"] }}</td>
+          <td>
+            <ul>
+              {% for t in biz['types'] %}
+              <li>{{ t }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
 
-    <h1>
-        Traffic:
-    </h1>
-    <span>{{ traffic['logo_url'] }}</span><br><!--use this as an image url-->
-    <span>{{ traffic['more_info_icon'] }}</span><br><!--use this as an image url-->
-    <span>Description: {{ traffic['description'] }}</span><br>
-    <span>Walk Score: {{ traffic['walkscore'] }}</span><br>
-    <span>Transit Score: {{ traffic['transit']['score'] }}</span><br>
-    <span>Bike Score: {{ traffic['bike']['score'] }}</span><br>
-    <span>More info: {{ traffic['help_link'] }}</span><br>
+  <h1>
+    Traffic:
+  </h1>
+  <div>
+    <table class="table table-striped table-responsive-md btn-table">
+      <tbody>
+        <tr>
+          <td>
+            <img src='{{ traffic["logo_url"] }}'>
+          </td>
+          <td>
+            <img src='{{ traffic["more_info_icon"] }}'>
+          </td>
+          <td>Description: {{ traffic["description"] }}</td>
+          <td>Walk Score: {{ traffic["walkscore"] }}</td>
+          <td>Transit Score: {{ traffic["transit"]["score"] }}</td>
+          <td>Bike Score: {{ traffic["bike"]["score"] }}</td>
+          <td>More info: {{ traffic["help_link"] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <h1>
-    	Real Estate data:
-    </h1>
-    <h2>
-    	Rent:
-    </h2>
-    <ul>
-    	<li>
-    		<span>High: {{ cost_data['rentRangeHigh'] }}</span><br>
-    	</li>
-    	<li>
-    		<span>Average: {{ cost_data['rent'] }}</span><br>
-    	</li>
-    	<li>
-    		<span>Low: {{ cost_data['rentRangeLow'] }}</span><br>
-    	</li>
-    </ul>
+  <h1>
+    Real Estate data:
+  </h1>
+  <h2>
+    Rent:
+  </h2>
+  <div>
+    <table class="table table-striped table-responsive-md btn-table">
+      <tbody>
+        <tr>
+          <td>High: ${{ cost_data["rentRangeHigh"] }}</td>
+          <td>Average: ${{ cost_data["rent"] }}</td>
+          <td>Low: ${{ cost_data["rentRangeLow"] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <h1>
-        Air Quality:
-    </h1>
-    <span>Data available: {{ air_qual['data_available'] }}</span>
-    <ul>
-        {% for a, q in air_qual['indexes'].items() %}
-            <li>
-                <h2>
-                    {{ q['display_name'] }}
-                </h2>
-                <span>AQI: {{ q['aqi_display'] }}</span><br>
-                <span>{{ q['color'] }}</span><br>
-                <span>Category: {{ q['category'] }}</span><br>
-                <span>Dominant pollutant: {{ q['dominant_pollutant'] }}</span><br>
-                <br><br><br>
-            </li>
-        {% endfor %}
-    </ul>
+  <h1>
+    Air Quality:
+  </h1>
+  <div>
+    <table class="table table-striped table-responsive-md btn-table">
+      <tbody>
+        <tr>
+          <td>Data available: {{ air_qual["data_available"] }}</td>
+          <td>
+                {% for a, q in air_qual['indexes'].items() %}
+                <td bgColor='{{ q["color"] }}'>AQI: {{ q["aqi_display"] }}</td>
+                <td>Category: {{ q["category"] }}</td>
+                <td>Dominant pollutant: {{ q["dominant_pollutant"] }}</td>
+                {% endfor %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
