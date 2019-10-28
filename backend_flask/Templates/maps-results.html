@@ -18,6 +18,7 @@
         padding: 0;
       }
     </style>
+    <link href="/static/styles.css" rel="stylesheet" />
   </head>
   <body>
     <div id="map"></div>
@@ -56,9 +57,96 @@
        * This constructor takes the control DIV as an argument.
        * @constructor
        */
+      function BikeCenterControl(bikeControlDiv, map) {
+        // Set CSS for the control border.
+        let bikeControlUI = document.createElement('div');
+        bikeControlUI.style.backgroundColor = '#fff';
+        bikeControlUI.style.border = '2px solid #fff';
+        bikeControlUI.style.borderRadius = '3px';
+        bikeControlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        bikeControlUI.style.cursor = 'pointer';
+        bikeControlUI.style.marginBottom = '22px';
+        bikeControlUI.style.textAlign = 'center';
+        bikeControlUI.title = 'Click to view the report';
+        bikeControlDiv.appendChild(bikeControlUI);
+
+        // Set CSS for the control interior.
+        let bikeControlText = document.createElement('div');
+        bikeControlText.style.color = 'rgb(25,25,25)';
+        bikeControlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        bikeControlText.style.fontSize = '16px';
+        bikeControlText.style.lineHeight = '38px';
+        bikeControlText.style.paddingLeft = '5px';
+        bikeControlText.style.paddingRight = '5px';
+        bikeControlText.innerHTML = 'Bike Report';
+        bikeControlUI.appendChild(bikeControlText);
+
+        // Setup the click event listeners: simply set the map to latlng.
+        bikeControlUI.addEventListener('click', function() {
+          window.open('/report?' + queryString);
+        });
+      }
+
+      function MapButton(options) {
+        const { text, title, onClick } = options;
+
+        // Set CSS for the control border.
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.backgroundColor = '#fff';
+        buttonContainer.style.border = '2px solid #fff';
+        buttonContainer.style.borderRadius = '3px';
+        buttonContainer.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        buttonContainer.style.cursor = 'pointer';
+        buttonContainer.style.marginBottom = '22px';
+        buttonContainer.style.textAlign = 'center';
+        buttonContainer.title = title;
+
+        // Set CSS for the control interior.
+        const buttonText = document.createElement('div');
+        buttonText.style.color = 'rgb(25,25,25)';
+        buttonText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        buttonText.style.fontSize = '16px';
+        buttonText.style.lineHeight = '38px';
+        buttonText.style.paddingLeft = '5px';
+        buttonText.style.paddingRight = '5px';
+        buttonText.innerHTML = text;
+
+        buttonContainer.append(buttonText);
+
+        // Setup the click event listeners: simply set the map to latlng.
+        buttonContainer.addEventListener('click', onClick);
+
+        return buttonContainer;
+      }
+
+      function MapImageButton(options) {
+        const { innerHTML, title, onClick } = options;
+
+        // Set CSS for the control border.
+        const buttonContainer = document.createElement('div');
+        buttonContainer.title = title;
+
+        // Set CSS for the control interior.
+        const buttonImageContainer = document.createElement('div');
+        buttonImageContainer.innerHTML = innerHTML;
+
+        buttonContainer.append(buttonImageContainer);
+
+        // Setup the click event listeners: simply set the map to latlng.
+        buttonContainer.addEventListener('click', onClick);
+
+        return buttonContainer;
+      }
+
+      /**
+       * The CenterControl adds a control to the map that recenters the map on
+       * latlng.
+       * This constructor takes the control DIV as an argument.
+       * @constructor
+       */
       function CenterControl(controlDiv, map) {
         // Set CSS for the control border.
-        var controlUI = document.createElement('div');
+        let controlUI = document.createElement('div');
         controlUI.style.backgroundColor = '#fff';
         controlUI.style.border = '2px solid #fff';
         controlUI.style.borderRadius = '3px';
@@ -70,7 +158,7 @@
         controlDiv.appendChild(controlUI);
 
         // Set CSS for the control interior.
-        var controlText = document.createElement('div');
+        let controlText = document.createElement('div');
         controlText.style.color = 'rgb(25,25,25)';
         controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
         controlText.style.fontSize = '16px';
@@ -88,6 +176,15 @@
 
       function initMap() {
         makeRequest();
+      }
+
+      function makeBikeRequest(callback) {
+        $.ajax({
+          url: '/traffic_api?' + queryString,
+          success: function(result) {
+            callback(result);
+          },
+        });
       }
 
       function makeRequest() {
@@ -155,13 +252,31 @@
 
             // Create the DIV to hold the control and call the CenterControl()
             // constructor passing in this DIV.
-            var centerControlDiv = document.createElement('div');
-            var centerControl = new CenterControl(centerControlDiv, map);
+            let centerControlDiv = document.createElement('div');
+            let centerControl = new CenterControl(centerControlDiv, map);
 
             centerControlDiv.index = 1;
             map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(
               centerControlDiv
             );
+
+            makeBikeRequest(function(bikeRequestResult) {
+              console.log(bikeRequestResult);
+              let score = bikeRequestResult.bike.score;
+
+              const bikeControl = new MapImageButton({
+                title: 'Click to view Bike report',
+                innerHTML: `<div class="bike-score-image"><h1>${score}</h1></div>`,
+                onClick: () => {
+                  console.log('Open bike report');
+                  window.open(bikeRequestResult.more_info_link);
+                },
+              });
+
+              map.controls[google.maps.ControlPosition.LEFT_TOP].push(
+                bikeControl
+              );
+            });
 
             $('#div1').html({ result });
           },
