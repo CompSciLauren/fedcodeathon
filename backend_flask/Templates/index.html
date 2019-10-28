@@ -97,51 +97,56 @@
           </div>
           <div class="col-lg-10 align-self-baseline">
             <p class="text-white-75 font-weight-light mb-5">
-              Enter information below to choose the location for your next entrepreneurial journey!
+              Enter information below to choose the location for your next
+              entrepreneurial journey!
             </p>
 
             <div class="row">
               <form class="form-inline" method="GET" action="/map">
-                <div class="form-group">
-                  <!-- location input -->
-                  <input
-                    id="autocomplete_search"
-                    name="autocomplete_search"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter a city"
-                  />
+                <div class="container form-group">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <!-- location input -->
+                      <input
+                        id="autocomplete_search"
+                        name="autocomplete_search"
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter a city"
+                      />
+                    </div>
+                    <div class="col-md-4">
+                      <!-- business type input -->
+                      <input
+                        id="business_type_search"
+                        name="business_type_search"
+                        type="text"
+                        class="form-control"
+                        placeholder="Business type"
+                      />
+                    </div>
+                    <div class="col-md-4">
+                      <!-- radius input -->
+                      <input
+                        id="radius_search"
+                        name="radius_search"
+                        type="text"
+                        class="form-control"
+                        placeholder="Radius (in miles)"
+                      />
+                    </div>
+                    <div class="col-md-12" style="margin-top: 48px">
+                      <button
+                        id="search-button"
+                        class="btn btn-primary btn-xl js-scroll-trigger"
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <input id="lat" name="lat" type="hidden" />
                 <input id="lng" name="lng" type="hidden" />
-                <div class="form-group">
-                  <!-- business type input -->
-                  <input
-                    id="business_type_search"
-                    name="business_type_search"
-                    type="text"
-                    class="form-control"
-                    placeholder="Business type"
-                  />
-                </div>
-                <div class="form-group">
-                  <!-- radius input -->
-                  <input
-                    id="radius_search"
-                    name="radius_search"
-                    type="text"
-                    class="form-control"
-                    placeholder="Radius (in miles)"
-                  />
-                </div>
-                <div class="form-group">
-                  <button
-                    id="search-button"
-                    class="btn btn-primary btn-xl js-scroll-trigger"
-                  >
-                    Search
-                  </button>
-                </div>
               </form>
             </div>
           </div>
@@ -157,16 +162,18 @@
             <h2 class="text-white mt-0">About us</h2>
             <hr class="divider light my-4" />
             <p class="text-white-100 mb-4">
-               Which City should we choose to start our next business? 
-            <br>
-              Will there be a lot of competitors around the area? 
-            <br>
-              Are real-estate prices expensive there? 
-            <br>
-            <br>
-              With ValleyFind, our team has designed an innovative solution to help entrepreneurs 
-              answer these questions. Our software includes the latest, most insightful data 
-              to help entrepreneurs optimize their search for the perfect location to start their next business.
+              Which City should we choose to start our next business?
+              <br />
+              Will there be a lot of competitors around the area?
+              <br />
+              Are real-estate prices expensive there?
+              <br />
+              <br />
+              With ValleyFind, our team has designed an innovative solution to
+              help entrepreneurs answer these questions. Our software includes
+              the latest, most insightful data to help entrepreneurs optimize
+              their search for the perfect location to start their next
+              business.
             </p>
           </div>
         </div>
@@ -184,7 +191,8 @@
               <i class="fas fa-4x fa-trophy text-primary mb-4"></i>
               <h3 class="h4 mb-2">Business Competition</h3>
               <p class="text-muted mb-0">
-                Providing our users with the latest insights on their business competition in the area.
+                Providing our users with the latest insights on their business
+                competition in the area.
               </p>
             </div>
           </div>
@@ -211,7 +219,8 @@
               <i class="fas fa-4x fa-smog text-primary mb-4"></i>
               <h3 class="h4 mb-2">Air quality Data</h3>
               <p class="text-muted mb-0">
-                Insightful Air quality and pollution data within the chosen area.
+                Insightful Air quality and pollution data within the chosen
+                area.
               </p>
             </div>
           </div>
@@ -354,8 +363,6 @@
       </div>
     </section>
 
-
-
     <!-- Contact Section -->
     <section class="page-section" id="contact">
       <div class="container">
@@ -364,7 +371,8 @@
             <h2 class="mt-0">Let's Get In Touch!</h2>
             <hr class="divider my-4" />
             <p class="text-muted mb-5">
-              Contact us to share ideas to help our software impact more entrepreneurs all around the world.
+              Contact us to share ideas to help our software impact more
+              entrepreneurs all around the world.
             </p>
           </div>
         </div>
@@ -411,17 +419,17 @@
     ></script>
 
     <script>
-      google.maps.event.addDomListener(window, "load", initialize);
+      google.maps.event.addDomListener(window, 'load', initialize);
       function initialize() {
-        let input = document.getElementById("autocomplete_search");
-        let businessTypeInput = document.getElementById("business_type_search");
-        let radiusInput = document.getElementById("radius_search");
+        let input = document.getElementById('autocomplete_search');
+        let businessTypeInput = document.getElementById('business_type_search');
+        let radiusInput = document.getElementById('radius_search');
         let autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.addListener("place_changed", function() {
+        autocomplete.addListener('place_changed', function() {
           let place = autocomplete.getPlace();
           // place variable will have all the information you are looking for.
-          $("#lat").val(place.geometry["location"].lat());
-          $("#lng").val(place.geometry["location"].lng());
+          $('#lat').val(place.geometry['location'].lat());
+          $('#lng').val(place.geometry['location'].lng());
         });
       }
     </script>
