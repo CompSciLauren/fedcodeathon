@@ -260,18 +260,6 @@
               centerControlDiv
             );
 
-            // Create the DIV to hold the control and call the BikeCenterControl()
-            // constructor passing in this DIV.
-
-            // let bikeCenterControlDiv = document.createElement('div');
-            // bikeCenterControlDiv.className = 'bike-score-image';
-            // let bikeCenterControl = new BikeCenterControl(
-            // bikeCenterControlDiv,
-            // map
-            // );
-
-            // bikeCenterControlDiv.index = 1;
-
             makeBikeRequest(function(bikeRequestResult) {
               console.log(bikeRequestResult);
               let score = bikeRequestResult.bike.score;
@@ -281,6 +269,7 @@
                 innerHTML: `<div class="bike-score-image"><h1>${score}</h1></div>`,
                 onClick: () => {
                   console.log('Open bike report');
+                  window.open(bikeRequestResult.more_info_link);
                 },
               });
 
