@@ -19,11 +19,14 @@ Our state-of-the-art technology provides entrepreneurs with the latest, most ins
 ## How It Works
 1. Users will first input: A potential business-location (e.g. city, county), a business-type (e.g. restaurant, antique shop), and a radius within the business-location.
 <img width="1440" alt="Screen Shot 2019-10-27 at 9 48 28 PM" src="https://user-images.githubusercontent.com/34931608/67648528-f0b32080-f903-11e9-94a7-144c637afafe.png">
+
 2. Our software will then display a map with checkpoints representing competing businesses within the chosen radius. It will also display traffic data such as walk, bike, and transit data. This will give entrepreneurs a brief insight regarding the chosen location.
 <img width="1440" alt="Screen Shot 2019-10-27 at 10 06 15 PM" src="https://user-images.githubusercontent.com/34931608/67649289-720bb280-f906-11e9-9f18-5444eff3d7f4.png">
+
 3. After clicking the view report button on the bottom left corner, we will then compile all of this information into a one-page report which will give the entrepreneur a detailed insight regarding the chosen location. 
 <img width="1440" alt="Screen Shot 2019-10-27 at 10 06 42 PM" src="https://user-images.githubusercontent.com/34931608/67649293-733cdf80-f906-11e9-9ff4-dadef347b8c1.png">
 <img width="1440" alt="Screen Shot 2019-10-27 at 10 07 56 PM" src="https://user-images.githubusercontent.com/34931608/67649294-746e0c80-f906-11e9-8b52-2898345318f1.png">
+
 4. Entrepreneurs will finally be able to generate reports of multiple other locations and compare them to decide on the perfect location to start their next business.
 
 ## Leadership
