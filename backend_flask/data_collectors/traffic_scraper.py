@@ -1,6 +1,7 @@
 from pprint import pprint
 import json
 import requests
+from pprint import pprint
 
 
 def get_traffic_lat_lng(lat, lng, keyfile):
@@ -17,7 +18,10 @@ def get_traffic_lat_lng(lat, lng, keyfile):
     results = response.json()
     print(results)
 
+    results.setdefault('transit', {'description': None, 'score': None, 'summary': None})
+    results.setdefault('bike', {'description': None, 'score': None, 'summary': None})
+
     return results
 
 if __name__ == "__main__":
-    print(get_traffic_lat_lng(38.899090, -94.724861, 'traffic_key'))
+    pprint(get_traffic_lat_lng(38.899090, -94.724861, 'traffic_key'))
