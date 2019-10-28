@@ -273,8 +273,31 @@
                 },
               });
 
+              const transitControl = new MapImageButton({
+                title: 'Click to view Transit report',
+                innerHTML: `<div class="transit-score-image"><h1>None</h1></div>`,
+                onClick: () => {
+                  window.open(bikeRequestResult.more_info_link);
+                },
+              });
+
+              const walkControl = new MapImageButton({
+                title: 'Click to view Walk report',
+                innerHTML: `<div class="walk-score-image"><h1>82</h1></div>`,
+                onClick: () => {
+                  window.open(bikeRequestResult.more_info_link);
+                },
+              });
+
+              const scoreContainer = document.createElement('div');
+              scoreContainer.innerHTML = `
+                ${bikeControl.outerHTML}
+                ${transitControl.outerHTML}
+                ${walkControl.outerHTML}
+              `;
+
               map.controls[google.maps.ControlPosition.LEFT_TOP].push(
-                bikeControl
+                scoreContainer
               );
             });
 
