@@ -86,6 +86,57 @@
         });
       }
 
+      function MapButton(options) {
+        const { text, title, onClick } = options;
+
+        // Set CSS for the control border.
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.backgroundColor = '#fff';
+        buttonContainer.style.border = '2px solid #fff';
+        buttonContainer.style.borderRadius = '3px';
+        buttonContainer.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        buttonContainer.style.cursor = 'pointer';
+        buttonContainer.style.marginBottom = '22px';
+        buttonContainer.style.textAlign = 'center';
+        buttonContainer.title = title;
+
+        // Set CSS for the control interior.
+        const buttonText = document.createElement('div');
+        buttonText.style.color = 'rgb(25,25,25)';
+        buttonText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        buttonText.style.fontSize = '16px';
+        buttonText.style.lineHeight = '38px';
+        buttonText.style.paddingLeft = '5px';
+        buttonText.style.paddingRight = '5px';
+        buttonText.innerHTML = text;
+
+        buttonContainer.append(buttonText);
+
+        // Setup the click event listeners: simply set the map to latlng.
+        buttonContainer.addEventListener('click', onClick);
+
+        return buttonContainer;
+      }
+
+      function MapImageButton(options) {
+        const { innerHTML, title, onClick } = options;
+
+        // Set CSS for the control border.
+        const buttonContainer = document.createElement('div');
+        buttonContainer.title = title;
+
+        // Set CSS for the control interior.
+        const buttonImageContainer = document.createElement('div');
+        buttonImageContainer.innerHTML = innerHTML;
+
+        buttonContainer.append(buttonImageContainer);
+
+        // Setup the click event listeners: simply set the map to latlng.
+        buttonContainer.addEventListener('click', onClick);
+
+        return buttonContainer;
+      }
+
       /**
        * The CenterControl adds a control to the map that recenters the map on
        * latlng.
@@ -201,15 +252,27 @@
 
             // Create the DIV to hold the control and call the BikeCenterControl()
             // constructor passing in this DIV.
-            let bikeCenterControlDiv = document.createElement('div');
-            let bikeCenterControl = new BikeCenterControl(
-              bikeCenterControlDiv,
-              map
-            );
 
-            bikeCenterControlDiv.index = 1;
+            // let bikeCenterControlDiv = document.createElement('div');
+            // bikeCenterControlDiv.className = 'bike-score-image';
+            // let bikeCenterControl = new BikeCenterControl(
+            // bikeCenterControlDiv,
+            // map
+            // );
+
+            // bikeCenterControlDiv.index = 1;
+
+            const bikeControl = new MapImageButton({
+              title: 'Click to view Bike report',
+              innerHTML:
+                '<img src="static/img/map/bike_score.png" class="bike-score-image" />',
+              onClick: () => {
+                console.log('Open bike report');
+              },
+            });
+
             map.controls[google.maps.ControlPosition.LEFT_TOP].push(
-              bikeCenterControlDiv
+              bikeControl
             );
 
             $('#div1').html({ result });
