@@ -15,6 +15,7 @@ def get_traffic_lat_lng(lat, lng, keyfile):
     response = requests.get(url, params=querystring)
 
     results = response.json()
+    print(results)
 
     return results
 

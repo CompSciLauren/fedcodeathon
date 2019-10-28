@@ -1,6 +1,10 @@
 .bike-score-image {
+  background: url('/static/img/map/bike_score.png');
   height: 128px;
   width: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .transit-score-image {

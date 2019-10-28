@@ -18,6 +18,7 @@
         padding: 0;
       }
     </style>
+    <link href="/static/styles.css" rel="stylesheet" />
   </head>
   <body>
     <div id="map"></div>
@@ -175,6 +176,16 @@
 
       function initMap() {
         makeRequest();
+        makeBikeRequest();
+      }
+
+      function makeBikeRequest(callback) {
+        $.ajax({
+          url: '/traffic_api?',
+          success: function(result) {
+            callback(result);
+          },
+        });
       }
 
       function makeRequest() {
@@ -262,18 +273,23 @@
 
             // bikeCenterControlDiv.index = 1;
 
-            const bikeControl = new MapImageButton({
-              title: 'Click to view Bike report',
-              innerHTML:
-                '<img src="static/img/map/bike_score.png" class="bike-score-image" />',
-              onClick: () => {
-                console.log('Open bike report');
-              },
-            });
+            makeBikeRequest(function(bikeRequestResult) {
+              console.log(bikeRequestResult);
+              let score = bikeRequestResult.status;
 
-            map.controls[google.maps.ControlPosition.LEFT_TOP].push(
-              bikeControl
-            );
+              const bikeControl = new MapImageButton({
+                title: 'Click to view Bike report',
+                innerHTML: `<div class="bike-score-image"><h1>${score}</h1></div>`,
+                onClick: () => {
+                  console.log('Open bike report');
+                  //
+                },
+              });
+
+              map.controls[google.maps.ControlPosition.LEFT_TOP].push(
+                bikeControl
+              );
+            });
 
             $('#div1').html({ result });
           },
