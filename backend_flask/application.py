@@ -33,14 +33,15 @@ def render_report():
     b_list = g_scraper.get_business_list_radius(area, biz)
     c_list = c_scraper.get_cost_lat_lng(lat, lng)
     air_qual = get_quality_lat_lng(lat, lng, 'data_collectors/air_quality_key')['data']
-
+    traffic = get_traffic_lat_lng(lat, lng, 'data_collectors/traffic_key')
     return render_template("report.html",
                         place=place,
                         biz=biz,
                         rad=rad,
                         biz_data=b_list['results'],
                         air_qual=air_qual,
-                        cost_data=c_list)
+                        cost_data=c_list,
+                        traffic=traffic)
 
 @app.route("/map_api", methods=["GET"])
 def map_api():

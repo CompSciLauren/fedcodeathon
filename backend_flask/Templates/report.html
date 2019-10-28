@@ -25,6 +25,17 @@
     </ul>
 
     <h1>
+        Traffic:
+    </h1>
+    <span>{{ traffic['logo_url'] }}</span><br><!--use this as an image url-->
+    <span>{{ traffic['more_info_icon'] }}</span><br><!--use this as an image url-->
+    <span>Description: {{ traffic['description'] }}</span><br>
+    <span>Walk Score: {{ traffic['walkscore'] }}</span><br>
+    <span>Transit Score: {{ traffic['transit']['score'] }}</span><br>
+    <span>Bike Score: {{ traffic['bike']['score'] }}</span><br>
+    <span>More info: {{ traffic['help_link'] }}</span><br>
+
+    <h1>
     	Real Estate data:
     </h1>
     <h2>
