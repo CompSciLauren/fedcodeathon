@@ -15,6 +15,7 @@ Our state-of-the-art technology provides entrepreneurs with the latest, most ins
 * Crime Safety Data
 * City, County, State Tax Data
 * Venture Capital Data
+* Nearby Talent Data
 
 ## How It Works
 1. Users will first input: A potential business-location (e.g. city, county), a business-type (e.g. restaurant, antique shop), and a radius within the business-location.
